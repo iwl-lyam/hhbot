@@ -1,4 +1,4 @@
-const {get,write} = require("../database")
+const {get,write} = require("../../database")
 
 module.exports = {
 	data: {
