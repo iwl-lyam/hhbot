@@ -36,6 +36,16 @@ module.exports = {
     presentations.push(data)
     write("presentations", presentations)
 
-    return interaction.reply("Presentation scheduled: " + data.name + "\nDescription: " + data.description)
+    return interaction.reply({embeds: [
+      {
+        color: 0x2a3fe1,
+        title: "Presentation logged",
+        fields: [
+          { name: "Name", value: data.name },
+          { name: "Description", value: data.description },
+          { name: "Notes", value: data.notes || "None" }
+        ]
+      }
+    ]})
 	},
 };

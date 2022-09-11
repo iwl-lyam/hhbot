@@ -25,18 +25,26 @@ module.exports = {
 		]
 	  },
 	async execute(interaction) {
-		console.log(interaction)
 		if (interaction.options._subcommand === "presentations") {
 
-			let text = "Presentations:\n"
+			let text = { content: "Presentations:", embeds: [] }
 			let data = await get("presentations")
 			data.forEach(pres => {
-				text += `${pres.name} (${pres.description || "No description given"}) by ${pres.presenter || "N/A"}\n`
+				text.embeds.push({
+					color: 0x2a3fe1,
+					title: "Presentation",
+					fields: [
+						{ name: "Name", value: pres.name, inline: true },
+						{ name: "Description", value: pres.description, inline: true },
+						{ name: "Notes", value: pres.notes || "None", inline: true },
+						{ name: "Presenter", value: pres.presenter, inline: true }
+					]
+				})
 			})
 			return interaction.reply(text);
 
 		} else if (interaction.options._subcommand === "events") {
-			
+
 			return interaction.reply('Events are fun!');
 
 		}
